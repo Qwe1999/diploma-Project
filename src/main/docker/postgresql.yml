@@ -1,0 +1,11 @@
+version: '2'
+services:
+  diplomaproject-postgresql:
+    image: postgres:12.1
+    # volumes:
+    #     - ~/volumes/jhipster/diplomaproject/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=diplomaproject
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432
