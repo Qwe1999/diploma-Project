@@ -44,6 +44,24 @@ public class CacheConfiguration {
             createCache(cm, com.diploma.domain.User.class.getName() + ".authorities");
             createCache(cm, com.diploma.domain.PersistentToken.class.getName());
             createCache(cm, com.diploma.domain.User.class.getName() + ".persistentTokens");
+            createCache(cm, com.diploma.domain.Patient.class.getName());
+            createCache(cm, com.diploma.domain.Patient.class.getName() + ".entryToHistoryDiseases");
+            createCache(cm, com.diploma.domain.Patient.class.getName() + ".certificates");
+            createCache(cm, com.diploma.domain.Patient.class.getName() + ".doctors");
+            createCache(cm, com.diploma.domain.EntryToDoctor.class.getName());
+            createCache(cm, com.diploma.domain.Person.class.getName());
+            createCache(cm, com.diploma.domain.Disease.class.getName());
+            createCache(cm, com.diploma.domain.Doctor.class.getName());
+            createCache(cm, com.diploma.domain.Doctor.class.getName() + ".patients");
+            createCache(cm, com.diploma.domain.EntryToHistoryDisease.class.getName());
+            createCache(cm, com.diploma.domain.EntryToHistoryDisease.class.getName() + ".medicalTests");
+            createCache(cm, com.diploma.domain.CertificateTempl.class.getName());
+            createCache(cm, com.diploma.domain.CertificateTempl.class.getName() + ".fieldCertificateTempls");
+            createCache(cm, com.diploma.domain.FieldCertificateTempl.class.getName());
+            createCache(cm, com.diploma.domain.Certificate.class.getName());
+            createCache(cm, com.diploma.domain.Certificate.class.getName() + ".fieldCertificates");
+            createCache(cm, com.diploma.domain.FieldCertificate.class.getName());
+            createCache(cm, com.diploma.domain.MedicalTest.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

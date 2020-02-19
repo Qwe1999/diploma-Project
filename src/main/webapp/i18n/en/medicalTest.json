@@ -1,0 +1,25 @@
+{
+  "diplomaprojectApp": {
+    "medicalTest": {
+      "home": {
+        "title": "Medical Tests",
+        "createLabel": "Create a new Medical Test",
+        "createOrEditLabel": "Create or edit a Medical Test",
+        "notFound": "No Medical Tests found"
+      },
+      "created": "A new Medical Test is created with identifier {{ param }}",
+      "updated": "A Medical Test is updated with identifier {{ param }}",
+      "deleted": "A Medical Test is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Medical Test {{ id }}?"
+      },
+      "detail": {
+        "title": "Medical Test"
+      },
+      "indicator": "Indicator",
+      "value": "Value",
+      "image": "Image",
+      "entryToHistoryDisease": "Entry To History Disease"
+    }
+  }
+}

@@ -1,0 +1,86 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-doctor-heading" jhiTranslate="diplomaprojectApp.doctor.home.createOrEditLabel">Create or edit a Doctor</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="diplomaprojectApp.doctor.position" for="field_position">Position</label>
+                    <input type="text" class="form-control" name="position" id="field_position"
+                           formControlName="position"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="diplomaprojectApp.doctor.room" for="field_room">Room</label>
+                    <input type="text" class="form-control" name="room" id="field_room"
+                           formControlName="room"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="diplomaprojectApp.doctor.workingHourBegin" for="field_workingHourBegin">Working Hour Begin</label>
+                    <div class="input-group">
+                        <input id="field_workingHourBegin" type="text" class="form-control" name="workingHourBegin" ngbDatepicker #workingHourBeginDp="ngbDatepicker" formControlName="workingHourBegin"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="workingHourBeginDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="diplomaprojectApp.doctor.workingHourEnd" for="field_workingHourEnd">Working Hour End</label>
+                    <div class="input-group">
+                        <input id="field_workingHourEnd" type="text" class="form-control" name="workingHourEnd" ngbDatepicker #workingHourEndDp="ngbDatepicker" formControlName="workingHourEnd"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="workingHourEndDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="diplomaprojectApp.doctor.daysWork" for="field_daysWork">Days Work</label>
+                    <select class="form-control" name="daysWork" formControlName="daysWork" id="field_daysWork">
+                        <option value="MONDAY">{{ 'diplomaprojectApp.Day.MONDAY' | translate }}</option>
+                        <option value="TUESDAY">{{ 'diplomaprojectApp.Day.TUESDAY' | translate }}</option>
+                        <option value="WEDNESDAY">{{ 'diplomaprojectApp.Day.WEDNESDAY' | translate }}</option>
+                        <option value="THURSDAY">{{ 'diplomaprojectApp.Day.THURSDAY' | translate }}</option>
+                        <option value="FRIDAY">{{ 'diplomaprojectApp.Day.FRIDAY' | translate }}</option>
+                        <option value="SATURDAY">{{ 'diplomaprojectApp.Day.SATURDAY' | translate }}</option>
+                        <option value="SUNDAY">{{ 'diplomaprojectApp.Day.SUNDAY' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="diplomaprojectApp.doctor.person" for="field_person">Person</label>
+                    <select class="form-control" id="field_person" name="person" formControlName="person">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="personOption.id === editForm.get('person')!.value?.id ? editForm.get('person')!.value : personOption" *ngFor="let personOption of people; trackBy: trackById">{{ personOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="diplomaprojectApp.doctor.patient" for="field_patients">Patient</label>
+                    <select class="form-control" id="field_patients" multiple name="patients" formControlName="patients">
+                        <option [ngValue]="getSelected(editForm.get('patients')!.value, patientOption)" *ngFor="let patientOption of patients; trackBy: trackById">{{ patientOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

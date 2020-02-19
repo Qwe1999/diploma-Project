@@ -1,0 +1,29 @@
+{
+  "diplomaprojectApp": {
+    "patient": {
+      "home": {
+        "title": "Patients",
+        "createLabel": "Створити новий Patient",
+        "createOrEditLabel": "Створити чи редагувати Patient",
+        "notFound": "No Patients found"
+      },
+      "created": "Новий Patient створений з ідентифікатором {{ param }}",
+      "updated": "Patient оновлений з ідентифікатором {{ param }}",
+      "deleted": "Patient видалений з ідентифікатором {{ param }}",
+      "delete": {
+        "question": "Ви впевнені, що хочете видалити Patient {{ id }}?"
+      },
+      "detail": {
+        "title": "Patient"
+      },
+      "allergy": "Allergy",
+      "bloodType": "Blood Type",
+      "job": "Job",
+      "person": "Person",
+      "entryToHistoryDisease": "Entry To History Disease",
+      "certificate": "Certificate",
+      "entryToDoctor": "Entry To Doctor",
+      "doctor": "Doctor"
+    }
+  }
+}

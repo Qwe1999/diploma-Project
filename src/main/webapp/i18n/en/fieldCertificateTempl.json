@@ -1,0 +1,23 @@
+{
+  "diplomaprojectApp": {
+    "fieldCertificateTempl": {
+      "home": {
+        "title": "Field Certificate Templs",
+        "createLabel": "Create a new Field Certificate Templ",
+        "createOrEditLabel": "Create or edit a Field Certificate Templ",
+        "notFound": "No Field Certificate Templs found"
+      },
+      "created": "A new Field Certificate Templ is created with identifier {{ param }}",
+      "updated": "A Field Certificate Templ is updated with identifier {{ param }}",
+      "deleted": "A Field Certificate Templ is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Field Certificate Templ {{ id }}?"
+      },
+      "detail": {
+        "title": "Field Certificate Templ"
+      },
+      "nameField": "Name Field",
+      "certificateTempl": "Certificate Templ"
+    }
+  }
+}

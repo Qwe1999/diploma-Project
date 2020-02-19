@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="patient">
+            <h2><span jhiTranslate="diplomaprojectApp.patient.detail.title">Patient</span> {{ patient.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="diplomaprojectApp.patient.allergy">Allergy</span></dt>
+                <dd>
+                    <span>{{ patient.allergy }}</span>
+                </dd>
+                <dt><span jhiTranslate="diplomaprojectApp.patient.bloodType">Blood Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'diplomaprojectApp.BloodType.' + patient.bloodType }}">{{ patient.bloodType }}</span>
+                </dd>
+                <dt><span jhiTranslate="diplomaprojectApp.patient.job">Job</span></dt>
+                <dd>
+                    <span>{{ patient.job }}</span>
+                </dd>
+                <dt><span jhiTranslate="diplomaprojectApp.patient.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="patient.person">
+                        <a [routerLink]="['/person', patient.person?.id, 'view']">{{ patient.person?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/patient', patient.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

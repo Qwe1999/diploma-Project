@@ -7,6 +7,17 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Сутності",
+        "patient": "Patient",
+        "entryToDoctor": "Entry To Doctor",
+        "person": "Person",
+        "disease": "Disease",
+        "doctor": "Doctor",
+        "entryToHistoryDisease": "Entry To History Disease",
+        "certificateTempl": "Certificate Templ",
+        "fieldCertificateTempl": "Field Certificate Templ",
+        "certificate": "Certificate",
+        "fieldCertificate": "Field Certificate",
+        "medicalTest": "Medical Test",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

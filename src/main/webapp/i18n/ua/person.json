@@ -1,0 +1,31 @@
+{
+  "diplomaprojectApp": {
+    "person": {
+      "home": {
+        "title": "People",
+        "createLabel": "Створити новий Person",
+        "createOrEditLabel": "Створити чи редагувати Person",
+        "notFound": "No People found"
+      },
+      "created": "Новий Person створений з ідентифікатором {{ param }}",
+      "updated": "Person оновлений з ідентифікатором {{ param }}",
+      "deleted": "Person видалений з ідентифікатором {{ param }}",
+      "delete": {
+        "question": "Ви впевнені, що хочете видалити Person {{ id }}?"
+      },
+      "detail": {
+        "title": "Person"
+      },
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "country": "Country",
+      "region": "Region",
+      "locality": "Locality",
+      "streat": "Streat",
+      "building": "Building",
+      "apartment": "Apartment",
+      "phoneNumber": "Phone Number",
+      "email": "Email"
+    }
+  }
+}

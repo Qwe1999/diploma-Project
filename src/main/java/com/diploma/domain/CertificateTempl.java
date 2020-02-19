@@ -1,0 +1,105 @@
+package com.diploma.domain;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import javax.persistence.*;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * A CertificateTempl.
+ */
+@Entity
+@Table(name = "certificate_templ")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+public class CertificateTempl implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @SequenceGenerator(name = "sequenceGenerator")
+    private Long id;
+
+    @Column(name = "name")
+    private String name;
+
+    @OneToMany(mappedBy = "certificateTempl")
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<FieldCertificateTempl> fieldCertificateTempls = new HashSet<>();
+
+    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public CertificateTempl name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Set<FieldCertificateTempl> getFieldCertificateTempls() {
+        return fieldCertificateTempls;
+    }
+
+    public CertificateTempl fieldCertificateTempls(Set<FieldCertificateTempl> fieldCertificateTempls) {
+        this.fieldCertificateTempls = fieldCertificateTempls;
+        return this;
+    }
+
+    public CertificateTempl addFieldCertificateTempl(FieldCertificateTempl fieldCertificateTempl) {
+        this.fieldCertificateTempls.add(fieldCertificateTempl);
+        fieldCertificateTempl.setCertificateTempl(this);
+        return this;
+    }
+
+    public CertificateTempl removeFieldCertificateTempl(FieldCertificateTempl fieldCertificateTempl) {
+        this.fieldCertificateTempls.remove(fieldCertificateTempl);
+        fieldCertificateTempl.setCertificateTempl(null);
+        return this;
+    }
+
+    public void setFieldCertificateTempls(Set<FieldCertificateTempl> fieldCertificateTempls) {
+        this.fieldCertificateTempls = fieldCertificateTempls;
+    }
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof CertificateTempl)) {
+            return false;
+        }
+        return id != null && id.equals(((CertificateTempl) o).id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
+    }
+
+    @Override
+    public String toString() {
+        return "CertificateTempl{" +
+            "id=" + getId() +
+            ", name='" + getName() + "'" +
+            "}";
+    }
+}

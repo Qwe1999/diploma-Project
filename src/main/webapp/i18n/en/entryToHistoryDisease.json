@@ -1,0 +1,27 @@
+{
+  "diplomaprojectApp": {
+    "entryToHistoryDisease": {
+      "home": {
+        "title": "Entry To History Diseases",
+        "createLabel": "Create a new Entry To History Disease",
+        "createOrEditLabel": "Create or edit a Entry To History Disease",
+        "notFound": "No Entry To History Diseases found"
+      },
+      "created": "A new Entry To History Disease is created with identifier {{ param }}",
+      "updated": "A Entry To History Disease is updated with identifier {{ param }}",
+      "deleted": "A Entry To History Disease is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Entry To History Disease {{ id }}?"
+      },
+      "detail": {
+        "title": "Entry To History Disease"
+      },
+      "diseaseName": "Disease Name",
+      "diseaseDescription": "Disease Description",
+      "treatment": "Treatment",
+      "date": "Date",
+      "medicalTest": "Medical Test",
+      "patient": "Patient"
+    }
+  }
+}

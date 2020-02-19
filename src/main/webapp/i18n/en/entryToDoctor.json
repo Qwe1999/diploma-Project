@@ -1,0 +1,24 @@
+{
+  "diplomaprojectApp": {
+    "entryToDoctor": {
+      "home": {
+        "title": "Entry To Doctors",
+        "createLabel": "Create a new Entry To Doctor",
+        "createOrEditLabel": "Create or edit a Entry To Doctor",
+        "notFound": "No Entry To Doctors found"
+      },
+      "created": "A new Entry To Doctor is created with identifier {{ param }}",
+      "updated": "A Entry To Doctor is updated with identifier {{ param }}",
+      "deleted": "A Entry To Doctor is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Entry To Doctor {{ id }}?"
+      },
+      "detail": {
+        "title": "Entry To Doctor"
+      },
+      "date": "Date",
+      "patient": "Patient",
+      "doctor": "Doctor"
+    }
+  }
+}

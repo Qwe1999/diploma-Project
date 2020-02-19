@@ -1,0 +1,83 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="diplomaprojectApp.entryToHistoryDisease.home.title">Entry To History Diseases</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-entry-to-history-disease" [routerLink]="['/entry-to-history-disease/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="diplomaprojectApp.entryToHistoryDisease.home.createLabel">
+            Create a new Entry To History Disease
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="entryToHistoryDiseases?.length === 0">
+        <span jhiTranslate="diplomaprojectApp.entryToHistoryDisease.home.notFound">No entryToHistoryDiseases found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="entryToHistoryDiseases?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="diseaseName"><span jhiTranslate="diplomaprojectApp.entryToHistoryDisease.diseaseName">Disease Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="diseaseDescription"><span jhiTranslate="diplomaprojectApp.entryToHistoryDisease.diseaseDescription">Disease Description</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="treatment"><span jhiTranslate="diplomaprojectApp.entryToHistoryDisease.treatment">Treatment</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="date"><span jhiTranslate="diplomaprojectApp.entryToHistoryDisease.date">Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="patient.id"><span jhiTranslate="diplomaprojectApp.entryToHistoryDisease.patient">Patient</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let entryToHistoryDisease of entryToHistoryDiseases ;trackBy: trackId">
+                    <td><a [routerLink]="['/entry-to-history-disease', entryToHistoryDisease.id, 'view']">{{ entryToHistoryDisease.id }}</a></td>
+                    <td>{{ entryToHistoryDisease.diseaseName }}</td>
+                    <td>{{ entryToHistoryDisease.diseaseDescription }}</td>
+                    <td>{{ entryToHistoryDisease.treatment }}</td>
+                    <td>{{ entryToHistoryDisease.date | date:'mediumDate' }}</td>
+                    <td>
+                        <div *ngIf="entryToHistoryDisease.patient">
+                            <a [routerLink]="['/patient', entryToHistoryDisease.patient?.id, 'view']" >{{ entryToHistoryDisease.patient?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/entry-to-history-disease', entryToHistoryDisease.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/entry-to-history-disease', entryToHistoryDisease.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(entryToHistoryDisease)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="entryToHistoryDiseases?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

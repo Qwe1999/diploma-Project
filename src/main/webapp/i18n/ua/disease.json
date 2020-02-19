@@ -1,0 +1,23 @@
+{
+  "diplomaprojectApp": {
+    "disease": {
+      "home": {
+        "title": "Diseases",
+        "createLabel": "Створити новий Disease",
+        "createOrEditLabel": "Створити чи редагувати Disease",
+        "notFound": "No Diseases found"
+      },
+      "created": "Новий Disease створений з ідентифікатором {{ param }}",
+      "updated": "Disease оновлений з ідентифікатором {{ param }}",
+      "deleted": "Disease видалений з ідентифікатором {{ param }}",
+      "delete": {
+        "question": "Ви впевнені, що хочете видалити Disease {{ id }}?"
+      },
+      "detail": {
+        "title": "Disease"
+      },
+      "name": "Name",
+      "description": "Description"
+    }
+  }
+}

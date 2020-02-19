@@ -1,0 +1,27 @@
+{
+  "diplomaprojectApp": {
+    "entryToHistoryDisease": {
+      "home": {
+        "title": "Entry To History Diseases",
+        "createLabel": "Створити новий Entry To History Disease",
+        "createOrEditLabel": "Створити чи редагувати Entry To History Disease",
+        "notFound": "No Entry To History Diseases found"
+      },
+      "created": "Новий Entry To History Disease створений з ідентифікатором {{ param }}",
+      "updated": "Entry To History Disease оновлений з ідентифікатором {{ param }}",
+      "deleted": "Entry To History Disease видалений з ідентифікатором {{ param }}",
+      "delete": {
+        "question": "Ви впевнені, що хочете видалити Entry To History Disease {{ id }}?"
+      },
+      "detail": {
+        "title": "Entry To History Disease"
+      },
+      "diseaseName": "Disease Name",
+      "diseaseDescription": "Disease Description",
+      "treatment": "Treatment",
+      "date": "Date",
+      "medicalTest": "Medical Test",
+      "patient": "Patient"
+    }
+  }
+}

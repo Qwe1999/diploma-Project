@@ -1,0 +1,61 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="diplomaprojectApp.certificateTempl.home.title">Certificate Templs</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-certificate-templ" [routerLink]="['/certificate-templ/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="diplomaprojectApp.certificateTempl.home.createLabel">
+            Create a new Certificate Templ
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="certificateTempls?.length === 0">
+        <span jhiTranslate="diplomaprojectApp.certificateTempl.home.notFound">No certificateTempls found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="certificateTempls?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="diplomaprojectApp.certificateTempl.name">Name</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let certificateTempl of certificateTempls ;trackBy: trackId">
+                    <td><a [routerLink]="['/certificate-templ', certificateTempl.id, 'view']">{{ certificateTempl.id }}</a></td>
+                    <td>{{ certificateTempl.name }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/certificate-templ', certificateTempl.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/certificate-templ', certificateTempl.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(certificateTempl)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

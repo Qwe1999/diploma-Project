@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="fieldCertificateTempl">
+            <h2><span jhiTranslate="diplomaprojectApp.fieldCertificateTempl.detail.title">Field Certificate Templ</span> {{ fieldCertificateTempl.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="diplomaprojectApp.fieldCertificateTempl.nameField">Name Field</span></dt>
+                <dd>
+                    <span>{{ fieldCertificateTempl.nameField }}</span>
+                </dd>
+                <dt><span jhiTranslate="diplomaprojectApp.fieldCertificateTempl.certificateTempl">Certificate Templ</span></dt>
+                <dd>
+                    <div *ngIf="fieldCertificateTempl.certificateTempl">
+                        <a [routerLink]="['/certificate-templ', fieldCertificateTempl.certificateTempl?.id, 'view']">{{ fieldCertificateTempl.certificateTempl?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/field-certificate-templ', fieldCertificateTempl.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

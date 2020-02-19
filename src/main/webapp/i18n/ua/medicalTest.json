@@ -1,0 +1,25 @@
+{
+  "diplomaprojectApp": {
+    "medicalTest": {
+      "home": {
+        "title": "Medical Tests",
+        "createLabel": "Створити новий Medical Test",
+        "createOrEditLabel": "Створити чи редагувати Medical Test",
+        "notFound": "No Medical Tests found"
+      },
+      "created": "Новий Medical Test створений з ідентифікатором {{ param }}",
+      "updated": "Medical Test оновлений з ідентифікатором {{ param }}",
+      "deleted": "Medical Test видалений з ідентифікатором {{ param }}",
+      "delete": {
+        "question": "Ви впевнені, що хочете видалити Medical Test {{ id }}?"
+      },
+      "detail": {
+        "title": "Medical Test"
+      },
+      "indicator": "Indicator",
+      "value": "Value",
+      "image": "Image",
+      "entryToHistoryDisease": "Entry To History Disease"
+    }
+  }
+}

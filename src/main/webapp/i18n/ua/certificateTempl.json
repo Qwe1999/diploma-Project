@@ -1,0 +1,23 @@
+{
+  "diplomaprojectApp": {
+    "certificateTempl": {
+      "home": {
+        "title": "Certificate Templs",
+        "createLabel": "Створити новий Certificate Templ",
+        "createOrEditLabel": "Створити чи редагувати Certificate Templ",
+        "notFound": "No Certificate Templs found"
+      },
+      "created": "Новий Certificate Templ створений з ідентифікатором {{ param }}",
+      "updated": "Certificate Templ оновлений з ідентифікатором {{ param }}",
+      "deleted": "Certificate Templ видалений з ідентифікатором {{ param }}",
+      "delete": {
+        "question": "Ви впевнені, що хочете видалити Certificate Templ {{ id }}?"
+      },
+      "detail": {
+        "title": "Certificate Templ"
+      },
+      "name": "Name",
+      "fieldCertificateTempl": "Field Certificate Templ"
+    }
+  }
+}

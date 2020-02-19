@@ -1,0 +1,76 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="diplomaprojectApp.medicalTest.home.title">Medical Tests</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-medical-test" [routerLink]="['/medical-test/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="diplomaprojectApp.medicalTest.home.createLabel">
+            Create a new Medical Test
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="medicalTests?.length === 0">
+        <span jhiTranslate="diplomaprojectApp.medicalTest.home.notFound">No medicalTests found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="medicalTests?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr>
+                    <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
+                    <th scope="col" ><span jhiTranslate="diplomaprojectApp.medicalTest.indicator">Indicator</span></th>
+                    <th scope="col" ><span jhiTranslate="diplomaprojectApp.medicalTest.value">Value</span></th>
+                    <th scope="col" ><span jhiTranslate="diplomaprojectApp.medicalTest.image">Image</span></th>
+                    <th scope="col" ><span jhiTranslate="diplomaprojectApp.medicalTest.entryToHistoryDisease">Entry To History Disease</span></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let medicalTest of medicalTests ;trackBy: trackId">
+                    <td><a [routerLink]="['/medical-test', medicalTest.id, 'view']">{{ medicalTest.id }}</a></td>
+                    <td>{{ medicalTest.indicator }}</td>
+                    <td>{{ medicalTest.value }}</td>
+                    <td>
+                        <a *ngIf="medicalTest.image" (click)="openFile(medicalTest.imageContentType, medicalTest.image)">
+                            <img [src]="'data:' + medicalTest.imageContentType + ';base64,' + medicalTest.image" style="max-height: 30px;" alt="medicalTest image"/>
+                        </a>
+                        <span *ngIf="medicalTest.image">{{ medicalTest.imageContentType }}, {{ byteSize(medicalTest.image) }}</span>
+                    </td>
+                    <td>
+                        <div *ngIf="medicalTest.entryToHistoryDisease">
+                            <a [routerLink]="['/entry-to-history-disease', medicalTest.entryToHistoryDisease?.id, 'view']" >{{ medicalTest.entryToHistoryDisease?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/medical-test', medicalTest.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/medical-test', medicalTest.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(medicalTest)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

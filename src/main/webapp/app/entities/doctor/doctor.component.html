@@ -1,0 +1,85 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="diplomaprojectApp.doctor.home.title">Doctors</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-doctor" [routerLink]="['/doctor/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="diplomaprojectApp.doctor.home.createLabel">
+            Create a new Doctor
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="doctors?.length === 0">
+        <span jhiTranslate="diplomaprojectApp.doctor.home.notFound">No doctors found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="doctors?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="position"><span jhiTranslate="diplomaprojectApp.doctor.position">Position</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="room"><span jhiTranslate="diplomaprojectApp.doctor.room">Room</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="workingHourBegin"><span jhiTranslate="diplomaprojectApp.doctor.workingHourBegin">Working Hour Begin</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="workingHourEnd"><span jhiTranslate="diplomaprojectApp.doctor.workingHourEnd">Working Hour End</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="daysWork"><span jhiTranslate="diplomaprojectApp.doctor.daysWork">Days Work</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="person.id"><span jhiTranslate="diplomaprojectApp.doctor.person">Person</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let doctor of doctors ;trackBy: trackId">
+                    <td><a [routerLink]="['/doctor', doctor.id, 'view']">{{ doctor.id }}</a></td>
+                    <td>{{ doctor.position }}</td>
+                    <td>{{ doctor.room }}</td>
+                    <td>{{ doctor.workingHourBegin | date:'mediumDate' }}</td>
+                    <td>{{ doctor.workingHourEnd | date:'mediumDate' }}</td>
+                    <td jhiTranslate="{{ 'diplomaprojectApp.Day.' + doctor.daysWork }}">{{ doctor.daysWork }}</td>
+                    <td>
+                        <div *ngIf="doctor.person">
+                            <a [routerLink]="['/person', doctor.person?.id, 'view']" >{{ doctor.person?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/doctor', doctor.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/doctor', doctor.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(doctor)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div *ngIf="doctors?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

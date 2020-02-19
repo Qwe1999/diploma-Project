@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="doctor">
+            <h2><span jhiTranslate="diplomaprojectApp.doctor.detail.title">Doctor</span> {{ doctor.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="diplomaprojectApp.doctor.position">Position</span></dt>
+                <dd>
+                    <span>{{ doctor.position }}</span>
+                </dd>
+                <dt><span jhiTranslate="diplomaprojectApp.doctor.room">Room</span></dt>
+                <dd>
+                    <span>{{ doctor.room }}</span>
+                </dd>
+                <dt><span jhiTranslate="diplomaprojectApp.doctor.workingHourBegin">Working Hour Begin</span></dt>
+                <dd>
+                    <span>{{ doctor.workingHourBegin }}</span>
+                </dd>
+                <dt><span jhiTranslate="diplomaprojectApp.doctor.workingHourEnd">Working Hour End</span></dt>
+                <dd>
+                    <span>{{ doctor.workingHourEnd }}</span>
+                </dd>
+                <dt><span jhiTranslate="diplomaprojectApp.doctor.daysWork">Days Work</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'diplomaprojectApp.Day.' + doctor.daysWork }}">{{ doctor.daysWork }}</span>
+                </dd>
+                <dt><span jhiTranslate="diplomaprojectApp.doctor.person">Person</span></dt>
+                <dd>
+                    <div *ngIf="doctor.person">
+                        <a [routerLink]="['/person', doctor.person?.id, 'view']">{{ doctor.person?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="diplomaprojectApp.doctor.patient">Patient</span></dt>
+                <dd>
+                    <span *ngFor="let patient of doctor.patients; let last = last">
+                        <a [routerLink]="['/patient', patient?.id, 'view']">{{ patient.id }}</a>{{ last ? '' : ', ' }}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/doctor', doctor.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

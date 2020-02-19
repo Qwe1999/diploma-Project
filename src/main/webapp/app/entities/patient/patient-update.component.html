@@ -1,0 +1,60 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-patient-heading" jhiTranslate="diplomaprojectApp.patient.home.createOrEditLabel">Create or edit a Patient</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="diplomaprojectApp.patient.allergy" for="field_allergy">Allergy</label>
+                    <input type="text" class="form-control" name="allergy" id="field_allergy"
+                           formControlName="allergy"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="diplomaprojectApp.patient.bloodType" for="field_bloodType">Blood Type</label>
+                    <select class="form-control" name="bloodType" formControlName="bloodType" id="field_bloodType">
+                        <option value="A_POSITIVE">{{ 'diplomaprojectApp.BloodType.A_POSITIVE' | translate }}</option>
+                        <option value="A_NEGATIVE">{{ 'diplomaprojectApp.BloodType.A_NEGATIVE' | translate }}</option>
+                        <option value="B_POSITIVE">{{ 'diplomaprojectApp.BloodType.B_POSITIVE' | translate }}</option>
+                        <option value="B_NEGATIVE">{{ 'diplomaprojectApp.BloodType.B_NEGATIVE' | translate }}</option>
+                        <option value="O_POSITIVE">{{ 'diplomaprojectApp.BloodType.O_POSITIVE' | translate }}</option>
+                        <option value="O_NEGATIVE">{{ 'diplomaprojectApp.BloodType.O_NEGATIVE' | translate }}</option>
+                        <option value="AB_POSITIVE">{{ 'diplomaprojectApp.BloodType.AB_POSITIVE' | translate }}</option>
+                        <option value="AB_NEGATIVE">{{ 'diplomaprojectApp.BloodType.AB_NEGATIVE' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="diplomaprojectApp.patient.job" for="field_job">Job</label>
+                    <input type="text" class="form-control" name="job" id="field_job"
+                           formControlName="job"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="diplomaprojectApp.patient.person" for="field_person">Person</label>
+                    <select class="form-control" id="field_person" name="person" formControlName="person">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="personOption.id === editForm.get('person')!.value?.id ? editForm.get('person')!.value : personOption" *ngFor="let personOption of people; trackBy: trackById">{{ personOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

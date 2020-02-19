@@ -1,0 +1,24 @@
+{
+  "diplomaprojectApp": {
+    "certificate": {
+      "home": {
+        "title": "Certificates",
+        "createLabel": "Створити новий Certificate",
+        "createOrEditLabel": "Створити чи редагувати Certificate",
+        "notFound": "No Certificates found"
+      },
+      "created": "Новий Certificate створений з ідентифікатором {{ param }}",
+      "updated": "Certificate оновлений з ідентифікатором {{ param }}",
+      "deleted": "Certificate видалений з ідентифікатором {{ param }}",
+      "delete": {
+        "question": "Ви впевнені, що хочете видалити Certificate {{ id }}?"
+      },
+      "detail": {
+        "title": "Certificate"
+      },
+      "name": "Name",
+      "fieldCertificate": "Field Certificate",
+      "patient": "Patient"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="certificate">
+            <h2><span jhiTranslate="diplomaprojectApp.certificate.detail.title">Certificate</span> {{ certificate.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="diplomaprojectApp.certificate.name">Name</span></dt>
+                <dd>
+                    <span>{{ certificate.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="diplomaprojectApp.certificate.patient">Patient</span></dt>
+                <dd>
+                    <div *ngIf="certificate.patient">
+                        <a [routerLink]="['/patient', certificate.patient?.id, 'view']">{{ certificate.patient?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/certificate', certificate.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
