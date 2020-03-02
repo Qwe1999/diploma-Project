@@ -1,0 +1,61 @@
+{
+    "name": "Doctor",
+    "fields": [
+        {
+            "fieldName": "position",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "room",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "workingHourBegin",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "workingHourEnd",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "daysWork",
+            "fieldType": "Day",
+            "fieldValues": "MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "person",
+            "otherEntityRelationshipName": "doctor",
+            "relationshipName": "person",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "patient",
+            "otherEntityRelationshipName": "doctor",
+            "relationshipName": "patient",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "entryToDoctor",
+            "otherEntityRelationshipName": "doctor",
+            "relationshipName": "entryToDoctor",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200219150400",
+    "entityTableName": "doctor",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

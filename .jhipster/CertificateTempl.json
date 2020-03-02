@@ -1,0 +1,27 @@
+{
+    "name": "CertificateTempl",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "fieldCertificateTempl",
+            "otherEntityRelationshipName": "certificateTempl",
+            "relationshipName": "fieldCertificateTempl"
+        }
+    ],
+    "changelogDate": "20200219150600",
+    "entityTableName": "certificate_templ",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

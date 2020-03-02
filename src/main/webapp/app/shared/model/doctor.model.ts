@@ -10,7 +10,7 @@ export interface IDoctor {
   room?: string;
   workingHourBegin?: Moment;
   workingHourEnd?: Moment;
-  daysWork?: Day;
+  daysWork?: Day[];
   person?: IPerson;
   patients?: IPatient[];
   entryToDoctor?: IEntryToDoctor;
@@ -23,7 +23,7 @@ export class Doctor implements IDoctor {
     public room?: string,
     public workingHourBegin?: Moment,
     public workingHourEnd?: Moment,
-    public daysWork?: Day,
+    public daysWork?: Day[],
     public person?: IPerson,
     public patients?: IPatient[],
     public entryToDoctor?: IEntryToDoctor

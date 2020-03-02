@@ -1,0 +1,32 @@
+{
+    "name": "FieldCertificate",
+    "fields": [
+        {
+            "fieldName": "nameField",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "value",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "certificate",
+            "otherEntityRelationshipName": "fieldCertificate",
+            "relationshipName": "certificate",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200219150900",
+    "entityTableName": "field_certificate",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

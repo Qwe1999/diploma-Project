@@ -5,18 +5,28 @@ import { AlertComponent } from './alert/alert.component';
 import { AlertErrorComponent } from './alert/alert-error.component';
 import { LoginModalComponent } from './login/login.component';
 import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
+import { RegisterModalComponent } from 'app/shared/registerModal/register-modal.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-  imports: [DiplomaprojectSharedLibsModule],
-  declarations: [FindLanguageFromKeyPipe, AlertComponent, AlertErrorComponent, LoginModalComponent, HasAnyAuthorityDirective],
-  entryComponents: [LoginModalComponent],
+  imports: [DiplomaprojectSharedLibsModule, RouterModule],
+  declarations: [
+    FindLanguageFromKeyPipe,
+    AlertComponent,
+    AlertErrorComponent,
+    RegisterModalComponent,
+    LoginModalComponent,
+    HasAnyAuthorityDirective
+  ],
+  entryComponents: [LoginModalComponent, RegisterModalComponent],
   exports: [
     DiplomaprojectSharedLibsModule,
     FindLanguageFromKeyPipe,
     AlertComponent,
     AlertErrorComponent,
     LoginModalComponent,
-    HasAnyAuthorityDirective
+    HasAnyAuthorityDirective,
+    RegisterModalComponent
   ]
 })
 export class DiplomaprojectSharedModule {}

@@ -1,0 +1,46 @@
+{
+    "name": "EntryToHistoryDisease",
+    "fields": [
+        {
+            "fieldName": "diseaseName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "diseaseDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "treatment",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "medicalTest",
+            "otherEntityRelationshipName": "entryToHistoryDisease",
+            "relationshipName": "medicalTest"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "patient",
+            "otherEntityRelationshipName": "entryToHistoryDisease",
+            "relationshipName": "patient",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200219150500",
+    "entityTableName": "entry_to_history_disease",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

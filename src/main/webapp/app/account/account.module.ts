@@ -5,7 +5,7 @@ import { DiplomaprojectSharedModule } from 'app/shared/shared.module';
 
 import { SessionsComponent } from './sessions/sessions.component';
 import { PasswordStrengthBarComponent } from './password/password-strength-bar.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from '../admin/register/register.component';
 import { ActivateComponent } from './activate/activate.component';
 import { PasswordComponent } from './password/password.component';
 import { PasswordResetInitComponent } from './password-reset/init/password-reset-init.component';
@@ -15,9 +15,9 @@ import { accountState } from './account.route';
 
 @NgModule({
   imports: [DiplomaprojectSharedModule, RouterModule.forChild(accountState)],
+  exports: [PasswordStrengthBarComponent],
   declarations: [
     ActivateComponent,
-    RegisterComponent,
     PasswordComponent,
     PasswordStrengthBarComponent,
     PasswordResetInitComponent,

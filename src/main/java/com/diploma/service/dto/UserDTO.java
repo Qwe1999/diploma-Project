@@ -3,7 +3,10 @@ package com.diploma.service.dto;
 import com.diploma.config.Constants;
 
 import com.diploma.domain.Authority;
+import com.diploma.domain.Doctor;
+import com.diploma.domain.Patient;
 import com.diploma.domain.User;
+import com.diploma.security.AuthoritiesConstants;
 
 import javax.validation.constraints.*;
 import java.time.Instant;
@@ -50,13 +53,18 @@ public class UserDTO {
 
     private Set<String> authorities;
 
+    private Patient patient;
+
+    private Doctor doctor;
+
+    private String userType;
+
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
 
     public UserDTO(User user) {
         this.id = user.getId();
-        this.login = user.getLogin();
         this.email = user.getEmail();
         this.activated = user.getActivated();
         this.imageUrl = user.getImageUrl();
@@ -65,6 +73,26 @@ public class UserDTO {
         this.createdDate = user.getCreatedDate();
         this.lastModifiedBy = user.getLastModifiedBy();
         this.lastModifiedDate = user.getLastModifiedDate();
+        this.patient = user.getPatient();
+        this.doctor = user.getDoctor();
+        this.authorities = user.getAuthorities().stream()
+            .map(Authority::getName)
+            .collect(Collectors.toSet());
+    }
+
+    public UserDTO(User user, String userType) {
+        this.id = user.getId();
+        this.email = user.getEmail();
+        this.activated = user.getActivated();
+        this.imageUrl = user.getImageUrl();
+        this.langKey = user.getLangKey();
+        this.createdBy = user.getCreatedBy();
+        this.createdDate = user.getCreatedDate();
+        this.lastModifiedBy = user.getLastModifiedBy();
+        this.lastModifiedDate = user.getLastModifiedDate();
+        this.patient = user.getPatient();
+        this.doctor = user.getDoctor();
+        this.userType = userType;
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
@@ -76,6 +104,15 @@ public class UserDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public String getLogin() {
@@ -172,6 +209,22 @@ public class UserDTO {
 
     public void setAuthorities(Set<String> authorities) {
         this.authorities = authorities;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
 
     @Override

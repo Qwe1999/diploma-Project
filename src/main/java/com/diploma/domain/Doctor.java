@@ -1,10 +1,12 @@
 package com.diploma.domain;
 
+import com.diploma.domain.enumeration.EnumArrayDayType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,6 +14,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.diploma.domain.enumeration.Day;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.Parameter;
 
 /**
  * A Doctor.
@@ -40,9 +44,12 @@ public class Doctor implements Serializable {
     @Column(name = "working_hour_end")
     private LocalDate workingHourEnd;
 
+
+    @ElementCollection(targetClass=Day.class)
     @Enumerated(EnumType.STRING)
-    @Column(name = "days_work")
-    private Day daysWork;
+    @CollectionTable(name="doctor_days_work")
+    @Column(name="days_work")
+    private Set<Day> daysWork;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -51,8 +58,8 @@ public class Doctor implements Serializable {
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "doctor_patient",
-               joinColumns = @JoinColumn(name = "doctor_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "patient_id", referencedColumnName = "id"))
+        joinColumns = @JoinColumn(name = "doctor_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "patient_id", referencedColumnName = "id"))
     private Set<Patient> patients = new HashSet<>();
 
     @OneToOne(mappedBy = "doctor")
@@ -120,16 +127,11 @@ public class Doctor implements Serializable {
         this.workingHourEnd = workingHourEnd;
     }
 
-    public Day getDaysWork() {
+    public Set<Day> getDaysWork() {
         return daysWork;
     }
 
-    public Doctor daysWork(Day daysWork) {
-        this.daysWork = daysWork;
-        return this;
-    }
-
-    public void setDaysWork(Day daysWork) {
+    public void setDaysWork(Set<Day> daysWork) {
         this.daysWork = daysWork;
     }
 

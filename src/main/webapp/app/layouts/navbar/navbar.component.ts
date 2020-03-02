@@ -9,6 +9,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { LoginService } from 'app/core/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { RegisterModalService } from 'app/shared/registerModal/register-modal.service';
 
 @Component({
   selector: 'jhi-navbar',
@@ -24,6 +25,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
+    private registerModalService: RegisterModalService,
     private languageService: JhiLanguageService,
     private sessionStorage: SessionStorageService,
     private accountService: AccountService,
@@ -56,6 +58,10 @@ export class NavbarComponent implements OnInit {
 
   login(): void {
     this.loginModalService.open();
+  }
+
+  register(): void {
+    this.registerModalService.open();
   }
 
   logout(): void {

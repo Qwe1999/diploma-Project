@@ -14,8 +14,6 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<SettingsComponent>;
     let mockAuth: MockAccountService;
     const accountValues: Account = {
-      firstName: 'John',
-      lastName: 'Doe',
       activated: true,
       email: 'john.doe@mail.com',
       langKey: 'en',
@@ -45,8 +43,6 @@ describe('Component Tests', () => {
       // GIVEN
       mockAuth.saveSpy.and.returnValue(of({}));
       const settingsFormValues = {
-        firstName: 'John',
-        lastName: 'Doe',
         email: 'john.doe@mail.com',
         langKey: 'en'
       };

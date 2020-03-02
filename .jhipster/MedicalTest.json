@@ -1,0 +1,37 @@
+{
+    "name": "MedicalTest",
+    "fields": [
+        {
+            "fieldName": "indicator",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "value",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "image",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "entryToHistoryDisease",
+            "otherEntityRelationshipName": "medicalTest",
+            "relationshipName": "entryToHistoryDisease",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200219151000",
+    "entityTableName": "medical_test",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

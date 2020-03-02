@@ -41,7 +41,8 @@
                     <label class="form-control-label" jhiTranslate="diplomaprojectApp.patient.person" for="field_person">Person</label>
                     <select class="form-control" id="field_person" name="person" formControlName="person">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="personOption.id === editForm.get('person')!.value?.id ? editForm.get('person')!.value : personOption" *ngFor="let personOption of people; trackBy: trackById">{{ personOption.id }}</option>
+                        <option [ngValue]="personOption.id === editForm.get('person')!.value?.id ? editForm.get('person')!.value : personOption"
+                                *ngFor="let personOption of people; trackBy: trackById">{{ personOption.id }}</option>
                     </select>
                 </div>
             </div>

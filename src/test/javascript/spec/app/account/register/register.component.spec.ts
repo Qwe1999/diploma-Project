@@ -6,8 +6,8 @@ import { JhiLanguageService } from 'ng-jhipster';
 import { MockLanguageService } from '../../../helpers/mock-language.service';
 import { DiplomaprojectTestModule } from '../../../test.module';
 import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/shared/constants/error.constants';
-import { RegisterService } from 'app/account/register/register.service';
-import { RegisterComponent } from 'app/account/register/register.component';
+import { RegisterService } from 'app/admin/register/register.service';
+import { RegisterComponent } from 'app/admin/register/register.component';
 
 describe('Component Tests', () => {
   describe('RegisterComponent', () => {

@@ -1,0 +1,65 @@
+{
+    "name": "Patient",
+    "fields": [
+        {
+            "fieldName": "allergy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "bloodType",
+            "fieldType": "BloodType",
+            "fieldValues": "A_POSITIVE,A_NEGATIVE,B_POSITIVE,B_NEGATIVE,O_POSITIVE,O_NEGATIVE,AB_POSITIVE,AB_NEGATIVE"
+        },
+        {
+            "fieldName": "job",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "person",
+            "otherEntityRelationshipName": "patient",
+            "relationshipName": "person",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "entryToHistoryDisease",
+            "otherEntityRelationshipName": "patient",
+            "relationshipName": "entryToHistoryDisease"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "certificate",
+            "otherEntityRelationshipName": "patient",
+            "relationshipName": "certificate"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "entryToDoctor",
+            "otherEntityRelationshipName": "patient",
+            "relationshipName": "entryToDoctor",
+            "ownerSide": false
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "doctor",
+            "otherEntityRelationshipName": "patient",
+            "relationshipName": "doctor",
+            "otherEntityField": "id",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200219150000",
+    "entityTableName": "patient",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

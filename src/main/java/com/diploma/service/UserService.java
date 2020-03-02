@@ -105,6 +105,7 @@ public class UserService {
                 throw new EmailAlreadyUsedException();
             }
         });
+
         User newUser = new User();
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setLogin(userDTO.getLogin().toLowerCase());
@@ -120,7 +121,17 @@ public class UserService {
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
-        authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
+        if (userDTO.getUserType().equals(AuthoritiesConstants.DOCTOR)){
+            newUser.setDoctor(userDTO.getDoctor());
+            authorityRepository.findById(AuthoritiesConstants.DOCTOR)
+                .ifPresent(authorities::add);
+        }
+        else if(userDTO.getUserType().equals(AuthoritiesConstants.PATIENT)){
+            newUser.setPatient(userDTO.getPatient());
+            authorityRepository.findById(AuthoritiesConstants.PATIENT)
+                .ifPresent(authorities::add);
+        }
+
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
@@ -130,7 +141,7 @@ public class UserService {
 
     private boolean removeNonActivatedUser(User existingUser) {
         if (existingUser.getActivated()) {
-             return false;
+            return false;
         }
         userRepository.delete(existingUser);
         userRepository.flush();
@@ -304,6 +315,7 @@ public class UserService {
 
     /**
      * Gets a list of all the authorities.
+     *
      * @return a list of all the authorities.
      */
     public List<String> getAuthorities() {
