@@ -121,12 +121,12 @@ public class UserService {
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
-        if (userDTO.getUserType().equals(AuthoritiesConstants.DOCTOR)){
+        if (userDTO.getTypeUser().equals(AuthoritiesConstants.DOCTOR)){
             newUser.setDoctor(userDTO.getDoctor());
             authorityRepository.findById(AuthoritiesConstants.DOCTOR)
                 .ifPresent(authorities::add);
         }
-        else if(userDTO.getUserType().equals(AuthoritiesConstants.PATIENT)){
+        else if(userDTO.getTypeUser().equals(AuthoritiesConstants.PATIENT)){
             newUser.setPatient(userDTO.getPatient());
             authorityRepository.findById(AuthoritiesConstants.PATIENT)
                 .ifPresent(authorities::add);

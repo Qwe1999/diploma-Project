@@ -6,7 +6,6 @@ import com.diploma.domain.Authority;
 import com.diploma.domain.Doctor;
 import com.diploma.domain.Patient;
 import com.diploma.domain.User;
-import com.diploma.security.AuthoritiesConstants;
 
 import javax.validation.constraints.*;
 import java.time.Instant;
@@ -57,7 +56,7 @@ public class UserDTO {
 
     private Doctor doctor;
 
-    private String userType;
+    private String typeUser;
 
     public UserDTO() {
         // Empty constructor needed for Jackson.
@@ -80,7 +79,7 @@ public class UserDTO {
             .collect(Collectors.toSet());
     }
 
-    public UserDTO(User user, String userType) {
+    public UserDTO(User user, String typeUser) {
         this.id = user.getId();
         this.email = user.getEmail();
         this.activated = user.getActivated();
@@ -92,7 +91,7 @@ public class UserDTO {
         this.lastModifiedDate = user.getLastModifiedDate();
         this.patient = user.getPatient();
         this.doctor = user.getDoctor();
-        this.userType = userType;
+        this.typeUser = typeUser;
         this.authorities = user.getAuthorities().stream()
             .map(Authority::getName)
             .collect(Collectors.toSet());
@@ -107,12 +106,12 @@ public class UserDTO {
     }
 
 
-    public String getUserType() {
-        return userType;
+    public String getTypeUser() {
+        return typeUser;
     }
 
-    public void setUserType(String userType) {
-        this.userType = userType;
+    public void setTypeUser(String typeUser) {
+        this.typeUser = typeUser;
     }
 
     public String getLogin() {

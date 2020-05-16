@@ -22,13 +22,13 @@ import { BloodType } from 'app/shared/model/enumerations/blood-type.model';
 export class RegisterComponent implements AfterViewInit, OnInit {
   @ViewChild('login', { static: false })
   login?: ElementRef;
-
   doNotMatch = false;
   error = false;
   typeUser = '';
   errorEmailExists = false;
   errorUserExists = false;
   success = false;
+  bloodTypes = BloodType;
   t = true;
   registerForm = this.fb.group({
     email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
@@ -57,6 +57,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
     private activateRoute: ActivatedRoute,
     private renderer: Renderer,
     private fb: FormBuilder
+
   ) {}
 
   ngOnInit(): void {
@@ -70,7 +71,6 @@ export class RegisterComponent implements AfterViewInit, OnInit {
   }
 
   register(): void {
-    console.log('asdddddd');
     this.doNotMatch = false;
     this.error = false;
     this.errorEmailExists = false;
@@ -108,10 +108,6 @@ export class RegisterComponent implements AfterViewInit, OnInit {
         user.patient = patient;
         user.typeUser = 'ROLE_PATIENT';
 
-        this.registerService.save(user).subscribe(
-          () => (this.success = true),
-          response => this.processError(response)
-        );
       } else if (this.typeUser === 'ROLE_DOCTOR') {
         const doctor: IDoctor = new Doctor();
         doctor.position = this.registerForm.get(['position'])!.value;
@@ -120,11 +116,12 @@ export class RegisterComponent implements AfterViewInit, OnInit {
         doctor.person = person;
         user.doctor = doctor;
         user.typeUser = 'ROLE_DOCTOR';
-        this.registerService.save(user).subscribe(
-          () => (this.success = true),
-          response => this.processError(response)
-        );
       }
+
+      this.registerService.save(user).subscribe(
+        () => (this.success = true),
+        response => this.processError(response)
+      );
     }
   }
 
@@ -147,7 +144,6 @@ export class RegisterComponent implements AfterViewInit, OnInit {
   }
 
   isDoctor(): boolean {
-    console.log('asddddcxzzzzz');
     return this.typeUser === 'ROLE_DOCTOR';
   }
 }
