@@ -4,6 +4,7 @@ import com.diploma.domain.PersistentToken;
 import com.diploma.repository.PersistentTokenRepository;
 import com.diploma.domain.User;
 import com.diploma.repository.UserRepository;
+import com.diploma.security.AuthoritiesConstants;
 import com.diploma.security.SecurityUtils;
 import com.diploma.service.MailService;
 import com.diploma.service.UserService;

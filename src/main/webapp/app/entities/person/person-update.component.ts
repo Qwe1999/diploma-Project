@@ -48,8 +48,7 @@ export class PersonUpdateComponent implements OnInit {
       streat: person.streat,
       building: person.building,
       apartment: person.apartment,
-      phoneNumber: person.phoneNumber,
-      email: person.email
+      phoneNumber: person.phoneNumber
     });
   }
 
@@ -79,8 +78,7 @@ export class PersonUpdateComponent implements OnInit {
       streat: this.editForm.get(['streat'])!.value,
       building: this.editForm.get(['building'])!.value,
       apartment: this.editForm.get(['apartment'])!.value,
-      phoneNumber: this.editForm.get(['phoneNumber'])!.value,
-      email: this.editForm.get(['email'])!.value
+      phoneNumber: this.editForm.get(['phoneNumber'])!.value
     };
   }
 

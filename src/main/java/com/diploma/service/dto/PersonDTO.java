@@ -23,7 +23,6 @@ public class PersonDTO {
 
     private String phoneNumber;
 
-    private String email;
 
     public PersonDTO() {
     }
@@ -39,7 +38,6 @@ public class PersonDTO {
         this.firstName = person.getFirstName();
         this.lastName = person.getLastName();
         this.phoneNumber = getPhoneNumber();
-        this.email = person.getEmail();
     }
 
     public String getFirstName() {
@@ -114,11 +112,4 @@ public class PersonDTO {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }

@@ -37,7 +37,7 @@ public class Patient implements Serializable {
     @Column(name = "job")
     private String job;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(unique = true)
     private Person person;
 

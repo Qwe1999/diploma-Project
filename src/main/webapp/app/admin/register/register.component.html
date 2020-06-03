@@ -329,7 +329,7 @@
                 </div>
 
 
-                <div class="form-group" *ngIf="isDoctor()"  display="dynamic">
+                <div class="form-group" *ngIf="isDoctor()" >
                     <label class="form-control-label" for="position">Position</label>
                     <input type="text" class="form-control" id="position" name="position" formControlName="position"
                            placeholder="{{ '' | translate }}"
@@ -389,7 +389,7 @@
                 <!--                    </div>-->
                 <!--                </div>-->
 
-                <button type="submit"  class="btn btn-primary"
+                <button type="submit"  class="btn btn-primary" formControlName="form"
                         jhiTranslate="register.form.button">Register
                 </button>
             </form>

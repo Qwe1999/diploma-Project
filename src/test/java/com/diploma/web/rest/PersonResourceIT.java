@@ -113,8 +113,7 @@ public class PersonResourceIT {
             .streat(DEFAULT_STREAT)
             .building(DEFAULT_BUILDING)
             .apartment(DEFAULT_APARTMENT)
-            .phoneNumber(DEFAULT_PHONE_NUMBER)
-            .email(DEFAULT_EMAIL);
+            .phoneNumber(DEFAULT_PHONE_NUMBER);
         return person;
     }
     /**
@@ -133,8 +132,7 @@ public class PersonResourceIT {
             .streat(UPDATED_STREAT)
             .building(UPDATED_BUILDING)
             .apartment(UPDATED_APARTMENT)
-            .phoneNumber(UPDATED_PHONE_NUMBER)
-            .email(UPDATED_EMAIL);
+            .phoneNumber(UPDATED_PHONE_NUMBER);
         return person;
     }
 
@@ -167,7 +165,6 @@ public class PersonResourceIT {
         assertThat(testPerson.getBuilding()).isEqualTo(DEFAULT_BUILDING);
         assertThat(testPerson.getApartment()).isEqualTo(DEFAULT_APARTMENT);
         assertThat(testPerson.getPhoneNumber()).isEqualTo(DEFAULT_PHONE_NUMBER);
-        assertThat(testPerson.getEmail()).isEqualTo(DEFAULT_EMAIL);
     }
 
     @Test
@@ -212,7 +209,7 @@ public class PersonResourceIT {
             .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)));
     }
-    
+
     @Test
     @Transactional
     public void getPerson() throws Exception {
@@ -265,8 +262,7 @@ public class PersonResourceIT {
             .streat(UPDATED_STREAT)
             .building(UPDATED_BUILDING)
             .apartment(UPDATED_APARTMENT)
-            .phoneNumber(UPDATED_PHONE_NUMBER)
-            .email(UPDATED_EMAIL);
+            .phoneNumber(UPDATED_PHONE_NUMBER);
 
         restPersonMockMvc.perform(put("/api/people")
             .contentType(TestUtil.APPLICATION_JSON)
@@ -286,7 +282,6 @@ public class PersonResourceIT {
         assertThat(testPerson.getBuilding()).isEqualTo(UPDATED_BUILDING);
         assertThat(testPerson.getApartment()).isEqualTo(UPDATED_APARTMENT);
         assertThat(testPerson.getPhoneNumber()).isEqualTo(UPDATED_PHONE_NUMBER);
-        assertThat(testPerson.getEmail()).isEqualTo(UPDATED_EMAIL);
     }
 
     @Test

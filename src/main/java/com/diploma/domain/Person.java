@@ -49,9 +49,6 @@ public class Person implements Serializable {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "email")
-    private String email;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -178,18 +175,10 @@ public class Person implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public Person email(String email) {
-        this.email = email;
-        return this;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+
+
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -221,7 +210,6 @@ public class Person implements Serializable {
             ", building='" + getBuilding() + "'" +
             ", apartment='" + getApartment() + "'" +
             ", phoneNumber='" + getPhoneNumber() + "'" +
-            ", email='" + getEmail() + "'" +
             "}";
     }
 }

@@ -28,7 +28,16 @@ export class RegisterComponent implements AfterViewInit, OnInit {
   errorEmailExists = false;
   errorUserExists = false;
   success = false;
-  bloodTypes = BloodType;
+  bloodTypes = [
+    BloodType.A_POSITIVE,
+    BloodType.A_NEGATIVE,
+    BloodType.AB_NEGATIVE,
+    BloodType.AB_POSITIVE,
+    BloodType.B_NEGATIVE,
+    BloodType.B_POSITIVE,
+    BloodType.O_NEGATIVE,
+    BloodType.O_POSITIVE
+  ];
   t = true;
   registerForm = this.fb.group({
     email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
@@ -57,7 +66,6 @@ export class RegisterComponent implements AfterViewInit, OnInit {
     private activateRoute: ActivatedRoute,
     private renderer: Renderer,
     private fb: FormBuilder
-
   ) {}
 
   ngOnInit(): void {
@@ -80,8 +88,6 @@ export class RegisterComponent implements AfterViewInit, OnInit {
     if (password !== this.registerForm.get(['confirmPassword'])!.value) {
       this.doNotMatch = true;
     } else {
-      const email = this.registerForm.get(['email'])!.value;
-
       const user: IUser = new User();
       user.login = this.registerForm.get(['firstName'])!.value + this.registerForm.get(['lastName'])!.value;
       user.password = password;
@@ -94,7 +100,6 @@ export class RegisterComponent implements AfterViewInit, OnInit {
       person.streat = this.registerForm.get(['streat'])!.value;
       person.building = this.registerForm.get(['building'])!.value;
       person.apartment = this.registerForm.get(['apartment'])!.value;
-      person.email = this.registerForm.get(['email'])!.value;
       person.firstName = this.registerForm.get(['firstName'])!.value;
       person.lastName = this.registerForm.get(['lastName'])!.value;
       person.phoneNumber = this.registerForm.get(['phoneNumber'])!.value;
@@ -107,17 +112,16 @@ export class RegisterComponent implements AfterViewInit, OnInit {
         patient.person = person;
         user.patient = patient;
         user.typeUser = 'ROLE_PATIENT';
-
       } else if (this.typeUser === 'ROLE_DOCTOR') {
         const doctor: IDoctor = new Doctor();
         doctor.position = this.registerForm.get(['position'])!.value;
         doctor.room = this.registerForm.get(['room'])!.value;
-        doctor.daysWork = this.registerForm.get(['days'])!.value;
+        //doctor.daysWork = this.registerForm.get(['days'])!.value;
         doctor.person = person;
         user.doctor = doctor;
         user.typeUser = 'ROLE_DOCTOR';
       }
-
+      user.email = this.registerForm.get(['email'])!.value;
       this.registerService.save(user).subscribe(
         () => (this.success = true),
         response => this.processError(response)

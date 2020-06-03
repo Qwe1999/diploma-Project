@@ -9,7 +9,6 @@ export interface IPerson {
   building?: string;
   apartment?: string;
   phoneNumber?: string;
-  email?: string;
 }
 
 export class Person implements IPerson {
@@ -23,7 +22,6 @@ export class Person implements IPerson {
     public streat?: string,
     public building?: string,
     public apartment?: string,
-    public phoneNumber?: string,
-    public email?: string
+    public phoneNumber?: string
   ) {}
 }
