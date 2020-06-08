@@ -46,7 +46,8 @@ export const patientRoute: Routes = [
       defaultSort: 'id,asc',
       pageTitle: 'diplomaprojectApp.patient.home.title'
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
+    pathMatch: 'full'
   },
   {
     path: ':id/view',

@@ -4,10 +4,20 @@ import { RouterModule } from '@angular/router';
 import { doctorRoute } from 'app/doctor/doctor.route';
 import { AccountModule } from 'app/account/account.module';
 import { RegisterComponent } from 'app/admin/register/register.component';
-import { DoctorsPatients } from 'app/doctor/patients/doctorsPatients';
+import { DoctorsPatientsComponent } from 'app/doctor/patients/doctorsPatients';
 
 @NgModule({
-  imports: [DiplomaprojectSharedModule, RouterModule.forChild([doctorRoute]), AccountModule],
-  declarations: [DoctorsPatients]
+  imports: [
+    DiplomaprojectSharedModule,
+    RouterModule.forChild([
+      doctorRoute,
+      {
+        path: 'patient',
+        loadChildren: () => import('../entities/patient/patient.module').then(m => m.DiplomaprojectPatientModule)
+      }
+    ]),
+    AccountModule
+  ],
+  declarations: [DoctorsPatientsComponent]
 })
 export class DoctorModule {}

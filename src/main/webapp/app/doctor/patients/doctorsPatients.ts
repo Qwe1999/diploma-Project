@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LANGUAGES } from 'app/core/language/language.constants';
 import { IPatient } from 'app/shared/model/patient.model';
 import { Subscription } from 'rxjs';
@@ -11,10 +11,10 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { PatientDeleteDialogComponent } from 'app/entities/patient/patient-delete-dialog.component';
 
 @Component({
-  selector: 'doctors-patients',
+  selector: 'jhi-doctors-patients',
   templateUrl: './patients.html'
 })
-export class DoctorsPatients implements OnInit {
+export class DoctorsPatientsComponent implements OnInit, OnDestroy {
   patients?: IPatient[];
   eventSubscriber?: Subscription;
   totalItems = 0;
