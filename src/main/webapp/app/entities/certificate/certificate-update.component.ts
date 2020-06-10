@@ -9,6 +9,8 @@ import { ICertificate, Certificate } from 'app/shared/model/certificate.model';
 import { CertificateService } from './certificate.service';
 import { IPatient } from 'app/shared/model/patient.model';
 import { PatientService } from 'app/entities/patient/patient.service';
+import { Account } from 'app/core/user/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
   selector: 'jhi-certificate-update',
@@ -17,6 +19,7 @@ import { PatientService } from 'app/entities/patient/patient.service';
 export class CertificateUpdateComponent implements OnInit {
   isSaving = false;
   patients: IPatient[] = [];
+  account: Account | null = null;
 
   editForm = this.fb.group({
     id: [],
@@ -28,14 +31,18 @@ export class CertificateUpdateComponent implements OnInit {
     protected certificateService: CertificateService,
     protected patientService: PatientService,
     protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ certificate }) => {
-      this.updateForm(certificate);
+    this.accountService.identity(true).subscribe(account => {
+      this.account = account;
+      this.activatedRoute.data.subscribe(({ certificate }) => {
+        this.updateForm(certificate);
 
-      this.patientService.query().subscribe((res: HttpResponse<IPatient[]>) => (this.patients = res.body || []));
+        this.patientService.query().subscribe((res: HttpResponse<IPatient[]>) => (this.patients = res.body || []));
+      });
     });
   }
 

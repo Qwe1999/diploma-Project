@@ -10,6 +10,10 @@ import { IPatient } from 'app/shared/model/patient.model';
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { PatientService } from './patient.service';
 import { PatientDeleteDialogComponent } from './patient-delete-dialog.component';
+import { User } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/user/account.model';
 
 @Component({
   selector: 'jhi-patient',
@@ -19,6 +23,8 @@ export class PatientComponent implements OnInit, OnDestroy {
   patients?: IPatient[];
   eventSubscriber?: Subscription;
   totalItems = 0;
+  curentUser?: User;
+  account: Account | null = null;
   itemsPerPage = ITEMS_PER_PAGE;
   page!: number;
   predicate!: string;
@@ -30,14 +36,16 @@ export class PatientComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected eventManager: JhiEventManager,
+    protected userService: UserService,
+    private accountService: AccountService,
     protected modalService: NgbModal
   ) {}
 
-  loadPage(page?: number): void {
+  loadPage(doctorId: number | undefined, page?: number): void {
     const pageToLoad: number = page || this.page;
 
     this.patientService
-      .query({
+      .queryWithDoctorId(doctorId, {
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort()
@@ -49,14 +57,18 @@ export class PatientComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(data => {
-      this.page = data.pagingParams.page;
-      this.ascending = data.pagingParams.ascending;
-      this.predicate = data.pagingParams.predicate;
-      this.ngbPaginationPage = data.pagingParams.page;
-      this.loadPage();
+    this.accountService.identity(true).subscribe(account => {
+      console.log('on Init' + account);
+      this.account = account;
+      this.activatedRoute.data.subscribe(data => {
+        this.page = data.pagingParams.page;
+        this.ascending = data.pagingParams.ascending;
+        this.predicate = data.pagingParams.predicate;
+        this.ngbPaginationPage = data.pagingParams.page;
+        this.loadPage(this.account == null ? 0 : this.account.doctor.id);
+      });
+      this.registerChangeInPatients();
     });
-    this.registerChangeInPatients();
   }
 
   ngOnDestroy(): void {
@@ -71,7 +83,9 @@ export class PatientComponent implements OnInit, OnDestroy {
   }
 
   registerChangeInPatients(): void {
-    this.eventSubscriber = this.eventManager.subscribe('patientListModification', () => this.loadPage());
+    this.eventSubscriber = this.eventManager.subscribe('patientListModification', () =>
+      this.loadPage(this.account == null ? 0 : this.account.doctor.id)
+    );
   }
 
   delete(patient: IPatient): void {

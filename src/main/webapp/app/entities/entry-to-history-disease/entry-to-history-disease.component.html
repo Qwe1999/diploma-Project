@@ -53,13 +53,13 @@
                             </button>
 
                             <button type="submit"
-                                    [routerLink]="['/entry-to-history-disease', entryToHistoryDisease.id, 'edit']"
+                                    [routerLink]="['/entry-to-history-disease', entryToHistoryDisease.id, 'edit']" *jhiHasAnyAuthority="['ROLE_DOCTOR']"
                                     class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                             </button>
 
-                            <button type="submit" (click)="delete(entryToHistoryDisease)"
+                            <button type="submit" (click)="delete(entryToHistoryDisease)" *jhiHasAnyAuthority="['ROLE_DOCTOR']"
                                     class="btn btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>

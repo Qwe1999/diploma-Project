@@ -172,7 +172,7 @@ public class UserResource {
             userService.getUserWithAuthoritiesByLogin(login)
                 .map(UserDTO::new));
     }
-
+    
     /**
      * {@code DELETE /users/:login} : delete the "login" User.
      *

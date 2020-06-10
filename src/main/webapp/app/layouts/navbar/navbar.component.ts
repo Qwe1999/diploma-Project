@@ -10,6 +10,7 @@ import { LoginModalService } from 'app/core/login/login-modal.service';
 import { LoginService } from 'app/core/login/login.service';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
 import { RegisterModalService } from 'app/shared/registerModal/register-modal.service';
+import { Account } from 'app/core/user/account.model';
 
 @Component({
   selector: 'jhi-navbar',
@@ -20,6 +21,8 @@ export class NavbarComponent implements OnInit {
   inProduction?: boolean;
   isNavbarCollapsed = true;
   languages = LANGUAGES;
+  account: Account | null = null;
+  patientId: number = -1;
   swaggerEnabled?: boolean;
   version: string;
 
@@ -37,10 +40,21 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileService.getProfileInfo().subscribe(profileInfo => {
-      this.inProduction = profileInfo.inProduction;
-      this.swaggerEnabled = profileInfo.swaggerEnabled;
+    this.accountService.identity(true).subscribe(account => {
+      this.account = account;
+      if (account != null) {
+        console.log('Acount not null ' + account.patient);
+        console.log('Acount not null ' + account);
+        console.log('Acount not null ' + account.patient.id);
+        this.patientId = account.patient.id || -1;
+      }
+      this.profileService.getProfileInfo().subscribe(profileInfo => {
+        this.inProduction = profileInfo.inProduction;
+        this.swaggerEnabled = profileInfo.swaggerEnabled;
+      });
     });
+
+    setTimeout(function() {}, 4000);
   }
 
   changeLanguage(languageKey: string): void {

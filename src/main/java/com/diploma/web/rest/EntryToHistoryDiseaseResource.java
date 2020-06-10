@@ -99,6 +99,18 @@ public class EntryToHistoryDiseaseResource {
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
+    @GetMapping("/entry-to-history-diseases-patient/{patientId}")
+    public ResponseEntity<List<EntryToHistoryDisease>> getAllEntryToHistoryDiseasesForPatient(Pageable pageable,
+                                                                                              @PathVariable Long patientId) {
+        log.debug("REST request to get a page of EntryToHistoryDiseases");
+        List<EntryToHistoryDisease> page = entryToHistoryDiseaseRepository.findAll(pageable)
+            .filter(entryToHistoryDisease -> entryToHistoryDisease.getPatient() != null)
+            .filter(entryToHistoryDisease ->
+            entryToHistoryDisease.getPatient().getId().equals(patientId)
+        ).toList();
+        return ResponseEntity.ok().body(page);
+    }
+
     /**
      * {@code GET  /entry-to-history-diseases/:id} : get the "id" entryToHistoryDisease.
      *

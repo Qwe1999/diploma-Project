@@ -91,7 +91,7 @@ public class PatientResource {
      * {@code GET  /patients} : get all the patients.
      *
      * @param pageable the pagination information.
-     * @param filter the filter of the request.
+     * @param filter   the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of patients in body.
      */
     @GetMapping("/patients")
@@ -107,6 +107,17 @@ public class PatientResource {
         Page<Patient> page = patientRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/patients-doctor/{idDoctor}")
+    public ResponseEntity<List<Patient>> getAllPatientsForDoctor(Pageable pageable, @RequestParam(required = false) String filter,
+                                                                 @PathVariable Long idDoctor) {
+        log.debug("REST request to get all Patients where entryToDoctor is null");
+        return new ResponseEntity<>(StreamSupport
+            .stream(patientRepository.findAll(pageable).spliterator(), false)
+            .filter(patient -> patient.getEntryToDoctor() != null)
+            .filter(patient -> patient.getEntryToDoctor().getDoctor().getId().equals(idDoctor))
+            .collect(Collectors.toList()), HttpStatus.OK);
     }
 
     /**

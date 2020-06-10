@@ -8,10 +8,14 @@ import { map } from 'rxjs/operators';
 
 import { IEntryToDoctor, EntryToDoctor } from 'app/shared/model/entry-to-doctor.model';
 import { EntryToDoctorService } from './entry-to-doctor.service';
-import { IPatient } from 'app/shared/model/patient.model';
+import { IPatient, Patient } from 'app/shared/model/patient.model';
 import { PatientService } from 'app/entities/patient/patient.service';
 import { IDoctor } from 'app/shared/model/doctor.model';
 import { DoctorService } from 'app/entities/doctor/doctor.service';
+import { User } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
+import { Account } from 'app/core/user/account.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 type SelectableEntity = IPatient | IDoctor;
 
@@ -23,6 +27,8 @@ export class EntryToDoctorUpdateComponent implements OnInit {
   isSaving = false;
   patients: IPatient[] = [];
   doctors: IDoctor[] = [];
+  curentUser?: User;
+  account: Account | null = null;
   dateDp: any;
 
   editForm = this.fb.group({
@@ -36,11 +42,17 @@ export class EntryToDoctorUpdateComponent implements OnInit {
     protected entryToDoctorService: EntryToDoctorService,
     protected patientService: PatientService,
     protected doctorService: DoctorService,
+    protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService,
     private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
+    this.accountService.identity(true).subscribe(account => {
+      console.log('on Init' + account);
+      this.account = account;
+    });
     this.activatedRoute.data.subscribe(({ entryToDoctor }) => {
       this.updateForm(entryToDoctor);
 
@@ -94,6 +106,7 @@ export class EntryToDoctorUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: entryToDoctor.id,
       date: entryToDoctor.date,
+
       patient: entryToDoctor.patient,
       doctor: entryToDoctor.doctor
     });
@@ -114,6 +127,15 @@ export class EntryToDoctorUpdateComponent implements OnInit {
   }
 
   private createFromForm(): IEntryToDoctor {
+    let patient = new Patient();
+    console.log('curent user ' + this.curentUser);
+    patient.id = this.curentUser == null ? 0 : this.curentUser.patient == null ? 0 : this.curentUser.patient.id;
+    this.userService.find(this.account == null ? '' : this.account.login).subscribe((res: User) => {
+      patient.id = res == null ? 0 : res.patient == null ? 0 : res.patient.id;
+      console.log(patient.id);
+    });
+    console.log(patient.id);
+
     return {
       ...new EntryToDoctor(),
       id: this.editForm.get(['id'])!.value,

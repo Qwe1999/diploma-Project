@@ -38,7 +38,6 @@ export const personRoute: Routes = [
     path: '',
     component: PersonComponent,
     data: {
-      authorities: ['ROLE_USER'],
       pageTitle: 'diplomaprojectApp.person.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -50,7 +49,6 @@ export const personRoute: Routes = [
       person: PersonResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
       pageTitle: 'diplomaprojectApp.person.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -62,7 +60,6 @@ export const personRoute: Routes = [
       person: PersonResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
       pageTitle: 'diplomaprojectApp.person.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -74,7 +71,6 @@ export const personRoute: Routes = [
       person: PersonResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
       pageTitle: 'diplomaprojectApp.person.home.title'
     },
     canActivate: [UserRouteAccessService]

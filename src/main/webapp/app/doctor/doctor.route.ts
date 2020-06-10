@@ -8,6 +8,7 @@ import { UserService } from 'app/core/user/user.service';
 import { Observable, of } from 'rxjs';
 import { IPatient } from 'app/shared/model/patient.model';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
+import { EntryToHistoryDiseaseResolve } from 'app/entities/entry-to-history-disease/entry-to-history-disease.route';
 
 export const doctorRoute: Route = {
   path: 'patients',
@@ -17,6 +18,5 @@ export const doctorRoute: Route = {
   },
   data: {
     defaultSort: 'id,asc'
-  },
-  canActivate: [UserRouteAccessService]
+  }
 };

@@ -116,7 +116,7 @@ export class RegisterComponent implements AfterViewInit, OnInit {
         const doctor: IDoctor = new Doctor();
         doctor.position = this.registerForm.get(['position'])!.value;
         doctor.room = this.registerForm.get(['room'])!.value;
-        //doctor.daysWork = this.registerForm.get(['days'])!.value;
+        // doctor.daysWork = this.registerForm.get(['days'])!.value;
         doctor.person = person;
         user.doctor = doctor;
         user.typeUser = 'ROLE_DOCTOR';

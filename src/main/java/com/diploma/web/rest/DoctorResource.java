@@ -90,9 +90,9 @@ public class DoctorResource {
     /**
      * {@code GET  /doctors} : get all the doctors.
      *
-     * @param pageable the pagination information.
+     * @param pageable  the pagination information.
      * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
-     * @param filter the filter of the request.
+     * @param filter    the filter of the request.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of doctors in body.
      */
     @GetMapping("/doctors")
@@ -113,6 +113,18 @@ public class DoctorResource {
         }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("/doctors-patient/{patientId}")
+    public ResponseEntity<List<Doctor>> getAllDoctorsForPatient(Pageable pageable, @RequestParam(required = false) String filter,
+                                                                @RequestParam(required = false, defaultValue = "false") boolean eagerload,
+                                                                @PathVariable Long patientId) {
+        log.debug("REST request to get all Doctors where entryToDoctor is null");
+        return new ResponseEntity<>(StreamSupport
+            .stream(doctorRepository.findAll(pageable).spliterator(), false)
+            .filter(doctor -> doctor.getEntryToDoctor() != null )
+            .filter(doctor -> doctor.getEntryToDoctor().getPatient().getId().equals(patientId))
+            .collect(Collectors.toList()), HttpStatus.OK);
     }
 
     /**

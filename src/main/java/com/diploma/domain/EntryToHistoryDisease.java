@@ -42,7 +42,7 @@ public class EntryToHistoryDisease implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<MedicalTest> medicalTests = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnoreProperties("entryToHistoryDiseases")
     private Patient patient;
 

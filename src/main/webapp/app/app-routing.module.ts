@@ -25,12 +25,12 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
           loadChildren: () => import('./account/account.module').then(m => m.AccountModule)
         },
         {
-          path: 'doctor',
+          path: 'doctors',
           loadChildren: () => import('./doctor/doctor.module').then(m => m.DoctorModule)
         },
         ...LAYOUT_ROUTES
       ],
-      { enableTracing: DEBUG_INFO_ENABLED }
+      { enableTracing: true }
     )
   ],
   exports: [RouterModule]

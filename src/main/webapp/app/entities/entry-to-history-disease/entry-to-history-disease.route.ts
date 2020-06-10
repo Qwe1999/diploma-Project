@@ -36,13 +36,24 @@ export class EntryToHistoryDiseaseResolve implements Resolve<IEntryToHistoryDise
 
 export const entryToHistoryDiseaseRoute: Routes = [
   {
+    path: ':patientId',
+    component: EntryToHistoryDiseaseComponent,
+    resolve: {
+      pagingParams: JhiResolvePagingParams
+    },
+    data: {
+      defaultSort: 'id,asc',
+      pageTitle: 'diplomaprojectApp.entryToHistoryDisease.home.title'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
     path: '',
     component: EntryToHistoryDiseaseComponent,
     resolve: {
       pagingParams: JhiResolvePagingParams
     },
     data: {
-      authorities: ['ROLE_USER'],
       defaultSort: 'id,asc',
       pageTitle: 'diplomaprojectApp.entryToHistoryDisease.home.title'
     },
@@ -55,7 +66,6 @@ export const entryToHistoryDiseaseRoute: Routes = [
       entryToHistoryDisease: EntryToHistoryDiseaseResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
       pageTitle: 'diplomaprojectApp.entryToHistoryDisease.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -67,7 +77,6 @@ export const entryToHistoryDiseaseRoute: Routes = [
       entryToHistoryDisease: EntryToHistoryDiseaseResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
       pageTitle: 'diplomaprojectApp.entryToHistoryDisease.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -79,7 +88,6 @@ export const entryToHistoryDiseaseRoute: Routes = [
       entryToHistoryDisease: EntryToHistoryDiseaseResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
       pageTitle: 'diplomaprojectApp.entryToHistoryDisease.home.title'
     },
     canActivate: [UserRouteAccessService]

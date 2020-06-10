@@ -7,17 +7,7 @@ import { RegisterComponent } from 'app/admin/register/register.component';
 import { DoctorsPatientsComponent } from 'app/doctor/patients/doctorsPatients';
 
 @NgModule({
-  imports: [
-    DiplomaprojectSharedModule,
-    RouterModule.forChild([
-      doctorRoute,
-      {
-        path: 'patient',
-        loadChildren: () => import('../entities/patient/patient.module').then(m => m.DiplomaprojectPatientModule)
-      }
-    ]),
-    AccountModule
-  ],
+  imports: [DiplomaprojectSharedModule, RouterModule.forChild([doctorRoute]), AccountModule],
   declarations: [DoctorsPatientsComponent]
 })
 export class DoctorModule {}

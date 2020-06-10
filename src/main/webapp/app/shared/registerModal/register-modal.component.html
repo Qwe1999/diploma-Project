@@ -11,9 +11,14 @@
     <label class="form-control-label" for="field_type_user">Choose user type</label>
     <select class="form-control" id="field_type_user" name="type_user"
            [(ngModel)]="typeUser">
-        <option [ngValue]="null"></option>
-        <option *ngFor="let type of userTypes;" [ngValue]="type">
-        {{ type }}</option>
+        <option value="A_POSITIVE">{{ 'diplomaprojectApp.BloodType.A_POSITIVE' | translate }}</option>
+        <option value="A_NEGATIVE">{{ 'diplomaprojectApp.BloodType.A_NEGATIVE' | translate }}</option>
+        <option value="B_POSITIVE">{{ 'diplomaprojectApp.BloodType.B_POSITIVE' | translate }}</option>
+        <option value="B_NEGATIVE">{{ 'diplomaprojectApp.BloodType.B_NEGATIVE' | translate }}</option>
+        <option value="O_POSITIVE">{{ 'diplomaprojectApp.BloodType.O_POSITIVE' | translate }}</option>
+        <option value="O_NEGATIVE">{{ 'diplomaprojectApp.BloodType.O_NEGATIVE' | translate }}</option>
+        <option value="AB_POSITIVE">{{ 'diplomaprojectApp.BloodType.AB_POSITIVE' | translate }}</option>
+        <option value="AB_NEGATIVE">{{ 'diplomaprojectApp.BloodType.AB_NEGATIVE' | translate }}</option>
     </select>
 
     <button type="submit" class="btn btn-primary" (click)="next()">Next</button>

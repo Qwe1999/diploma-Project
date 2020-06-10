@@ -34,6 +34,12 @@
                         <a [routerLink]="['/person', doctor.person?.id, 'view']">{{ doctor.person?.id }}</a>
                     </div>
                 </dd>
+                <dd>
+                    <span >First Name {{ doctor.person.firstName }}</span>
+                </dd>
+                <dd>
+                    <span >Last Name {{ doctor.person.lastName }}</span>
+                </dd>
                 <dt><span jhiTranslate="diplomaprojectApp.doctor.patient">Patient</span></dt>
                 <dd>
                     <span *ngFor="let patient of doctor.patients; let last = last">
@@ -48,7 +54,7 @@
                 <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
             </button>
 
-            <button type="button"
+            <button type="button" *jhiHasAnyAuthority="'ROLE_ADMIN'"
                     [routerLink]="['/doctor', doctor.id, 'edit']"
                     class="btn btn-primary">
                 <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>

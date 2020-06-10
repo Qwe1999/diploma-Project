@@ -38,7 +38,6 @@ export const entryToDoctorRoute: Routes = [
     path: '',
     component: EntryToDoctorComponent,
     data: {
-      authorities: ['ROLE_USER'],
       pageTitle: 'diplomaprojectApp.entryToDoctor.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -50,7 +49,6 @@ export const entryToDoctorRoute: Routes = [
       entryToDoctor: EntryToDoctorResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
       pageTitle: 'diplomaprojectApp.entryToDoctor.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -62,7 +60,6 @@ export const entryToDoctorRoute: Routes = [
       entryToDoctor: EntryToDoctorResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
       pageTitle: 'diplomaprojectApp.entryToDoctor.home.title'
     },
     canActivate: [UserRouteAccessService]
@@ -74,7 +71,6 @@ export const entryToDoctorRoute: Routes = [
       entryToDoctor: EntryToDoctorResolve
     },
     data: {
-      authorities: ['ROLE_USER'],
       pageTitle: 'diplomaprojectApp.entryToDoctor.home.title'
     },
     canActivate: [UserRouteAccessService]

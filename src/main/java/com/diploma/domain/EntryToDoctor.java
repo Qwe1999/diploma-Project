@@ -26,11 +26,11 @@ public class EntryToDoctor implements Serializable {
     @Column(name = "date")
     private LocalDate date;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(unique = true)
     private Patient patient;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(unique = true)
     private Doctor doctor;
 

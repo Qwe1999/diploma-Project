@@ -50,17 +50,24 @@
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
 
-                            <button type="submit"
+                            <button type="submit" *jhiHasAnyAuthority="['ROLE_DOCTOR','ROLE_ADMIN']"
                                     [routerLink]="['/patient', patient.id, 'edit']"
                                     class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                             </button>
 
-                            <button type="submit" (click)="delete(patient)"
+                            <button type="submit" (click)="delete(patient)" *jhiHasAnyAuthority="['ROLE_DOCTOR','ROLE_ADMIN']"
                                     class="btn btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+
+                            <button type="submit" *jhiHasAnyAuthority="['ROLE_DOCTOR','ROLE_ADMIN']"
+                                    [routerLink]="['../entry-to-history-disease', patient.id]"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="arrow-alt-right"></fa-icon>
+                                <span class="d-none d-md-inline" >View History Disease</span>
                             </button>
                         </div>
                     </td>
@@ -75,7 +82,7 @@
         </div>
 
         <div class="row justify-content-center">
-            <ngb-pagination [cnollectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
         </div>
     </div>
 </div>

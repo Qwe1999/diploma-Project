@@ -23,7 +23,6 @@
             <thead>
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="diplomaprojectApp.entryToDoctor.date">Date</span></th>
                     <th scope="col" ><span jhiTranslate="diplomaprojectApp.entryToDoctor.patient">Patient</span></th>
                     <th scope="col" ><span jhiTranslate="diplomaprojectApp.entryToDoctor.doctor">Doctor</span></th>
                     <th scope="col"></th>
@@ -35,7 +34,7 @@
                     <td>{{ entryToDoctor.date | date:'mediumDate' }}</td>
                     <td>
                         <div *ngIf="entryToDoctor.patient">
-                            <a [routerLink]="['/patient', entryToDoctor.patient?.id, 'view']" >{{ entryToDoctor.patient?.id }}</a>
+                            <a [routerLink]="['/patient', entryToDoctor.patient?.id, 'view']" >{{ entryToDoctor.patient?.person.firstName   }}</a>
                         </div>
                     </td>
                     <td>

@@ -10,6 +10,8 @@ import { IEntryToHistoryDisease } from 'app/shared/model/entry-to-history-diseas
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
 import { EntryToHistoryDiseaseService } from './entry-to-history-disease.service';
 import { EntryToHistoryDiseaseDeleteDialogComponent } from './entry-to-history-disease-delete-dialog.component';
+import { AccountService } from 'app/core/auth/account.service';
+import { Account } from 'app/core/user/account.model';
 
 @Component({
   selector: 'jhi-entry-to-history-disease',
@@ -18,26 +20,29 @@ import { EntryToHistoryDiseaseDeleteDialogComponent } from './entry-to-history-d
 export class EntryToHistoryDiseaseComponent implements OnInit, OnDestroy {
   entryToHistoryDiseases?: IEntryToHistoryDisease[];
   eventSubscriber?: Subscription;
+  account: Account | null = null;
+  authSubscription?: Subscription;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
   page!: number;
   predicate!: string;
   ascending!: boolean;
   ngbPaginationPage = 1;
+  patientId!: number;
 
   constructor(
     protected entryToHistoryDiseaseService: EntryToHistoryDiseaseService,
     protected activatedRoute: ActivatedRoute,
+    private accountService: AccountService,
     protected router: Router,
     protected eventManager: JhiEventManager,
     protected modalService: NgbModal
   ) {}
 
-  loadPage(page?: number): void {
+  loadPage(patientId: number, page?: number): void {
     const pageToLoad: number = page || this.page;
-
     this.entryToHistoryDiseaseService
-      .query({
+      .queryForPatientId(patientId, {
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort()
@@ -49,19 +54,35 @@ export class EntryToHistoryDiseaseComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(data => {
-      this.page = data.pagingParams.page;
-      this.ascending = data.pagingParams.ascending;
-      this.predicate = data.pagingParams.predicate;
-      this.ngbPaginationPage = data.pagingParams.page;
-      this.loadPage();
+    this.activatedRoute.params.subscribe(params => {
+      this.patientId = params['patientId'];
+
+      this.authSubscription = this.accountService.getAuthenticationState().subscribe(account => {
+        this.account = account;
+        console.log('Entry disease' + this.patientId);
+
+        if (this.patientId == null) {
+          this.patientId = this.account == null ? 0 : this.account.patient.id || 0;
+        }
+        console.log('Entry disease' + this.patientId);
+        this.activatedRoute.data.subscribe(data => {
+          this.page = data.pagingParams.page;
+          this.ascending = data.pagingParams.ascending;
+          this.predicate = data.pagingParams.predicate;
+          this.ngbPaginationPage = data.pagingParams.page;
+          this.loadPage(this.patientId);
+        });
+        this.registerChangeInEntryToHistoryDiseases();
+      });
     });
-    this.registerChangeInEntryToHistoryDiseases();
   }
 
   ngOnDestroy(): void {
     if (this.eventSubscriber) {
       this.eventManager.destroy(this.eventSubscriber);
+    }
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe();
     }
   }
 
@@ -71,7 +92,7 @@ export class EntryToHistoryDiseaseComponent implements OnInit, OnDestroy {
   }
 
   registerChangeInEntryToHistoryDiseases(): void {
-    this.eventSubscriber = this.eventManager.subscribe('entryToHistoryDiseaseListModification', () => this.loadPage());
+    this.eventSubscriber = this.eventManager.subscribe('entryToHistoryDiseaseListModification', () => this.loadPage(this.patientId));
   }
 
   delete(entryToHistoryDisease: IEntryToHistoryDisease): void {
@@ -90,7 +111,7 @@ export class EntryToHistoryDiseaseComponent implements OnInit, OnDestroy {
   protected onSuccess(data: IEntryToHistoryDisease[] | null, headers: HttpHeaders, page: number): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
-    this.router.navigate(['/entry-to-history-disease'], {
+    this.router.navigate(['/entry-to-history-disease/' + this.patientId], {
       queryParams: {
         page: this.page,
         size: this.itemsPerPage,
